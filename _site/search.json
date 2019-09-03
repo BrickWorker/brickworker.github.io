@@ -4,7 +4,7 @@
       "title"    : "How to Use",
       "tags"     : "misc and jekyll",
       "categories"     : "misc",
-      "url"      : "/cards-jekyll-template/how-to-use/",
+      "url"      : "/how-to-use/",
       "date"     : "09 May 2016"
     } ,
   
@@ -12,7 +12,7 @@
       "title"    : "Welcome to Jekyll",
       "tags"     : "jekyll",
       "categories"     : "jekyll",
-      "url"      : "/cards-jekyll-template/welcome-to-jekyll/",
+      "url"      : "/welcome-to-jekyll/",
       "date"     : "09 May 2016"
     } ,
   
@@ -20,7 +20,7 @@
       "title"    : "Analisando seu código JS com um linter",
       "tags"     : "js, linter, and tutorial",
       "categories"     : "js",
-      "url"      : "/cards-jekyll-template/analisando-seu-codigo-js-com-linter/",
+      "url"      : "/analisando-seu-codigo-js-com-linter/",
       "date"     : "05 Dec 2015"
     } ,
   
@@ -28,7 +28,7 @@
       "title"    : "Social Meta Tags",
       "tags"     : "social, seo, and tutorial",
       "categories"     : "html",
-      "url"      : "/cards-jekyll-template/social-meta-tags/",
+      "url"      : "/social-meta-tags/",
       "date"     : "10 Feb 2015"
     } ,
   
@@ -36,7 +36,7 @@
       "title"    : "#1 - Por que usar SVG?",
       "tags"     : "svg, frontend, trend, and dicarapida",
       "categories"     : "svg",
-      "url"      : "/cards-jekyll-template/por-que-usar-svg/",
+      "url"      : "/por-que-usar-svg/",
       "date"     : "08 Jan 2015"
     } ,
   
@@ -44,7 +44,7 @@
       "title"    : "Dica rápida #1",
       "tags"     : "dicarapida",
       "categories"     : "dev",
-      "url"      : "/cards-jekyll-template/dica-rapida-1/",
+      "url"      : "/dica-rapida-1/",
       "date"     : "08 Jan 2015"
     } 
   

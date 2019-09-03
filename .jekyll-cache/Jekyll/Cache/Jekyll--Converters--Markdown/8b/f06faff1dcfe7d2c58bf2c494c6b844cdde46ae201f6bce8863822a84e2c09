@@ -1,0 +1,150 @@
+I"[-<h2 id="introdução">Introdução</h2>
+
+<p>Faaaala pessoal, fazia muito tempo que eu não escrevia e confesso que isso já estava me agoniando. Então resolvi voltar a <s>falar besteiras</s> escrever!!</p>
+
+<p>Como não poderia deixar de ser, estou escrevendo ouvindo música. A playlist de hoje é <a href="https://open.spotify.com/user/spotifybrazilian/playlist/0nUucSaL2BGl2VZlbY5TwR">Brains</a>, uma playlist que está sendo montada lá na <a href="http://www.ccxp.com.br/">CCXP</a>, muita música maneira! Bota para tocar e vai lendo =D</p>
+
+<h2 id="qualidade-de-código">Qualidade de Código</h2>
+
+<p>Provavelmente você já passou horas escrevendo seu código lindo e aí, do nada, ele parou de funcionar. Então você ficou mais perdido que o John Travolta no Discurso da Dilma.</p>
+
+<p><img src="https://media.giphy.com/media/FWXpxEbWcOapq/giphy.gif" alt="John Travolta Meme" /></p>
+
+<p>Você, então, em toda sua humildade, chegou para um amigo e pediu para ele dar uma olhada e ele falou frases assim:</p>
+
+<blockquote>
+  <p>Você esqueceu de colocar o ponto e vírgula no final da linha. <br />
+Essa variável tá escrita errada, faltou um ‘a’ ali. <br />
+Cara, esse método não existe nessa linguagem…</p>
+</blockquote>
+
+<p>Se você já ficou puto com isso, sinta-se abraçado, porque eu também já cansei de cometer esses erros bobos que dava vontade de bater com a cara na parede depois de descobrir. Mas não fui só eu, nem só você, isso é normal do ser humano, não somos máquinas e as vezes uns detalhes passam sem percerbermos.</p>
+
+<p>No momento você está igual o John Travolta de novo.</p>
+
+<p><img src="https://media.giphy.com/media/FxufOs6bQwxO0/giphy.gif" alt="John Question" /></p>
+
+<h2 id="entendi-seu-ponto-mas-como-evitar-isso">Entendi seu ponto, mas como evitar isso?</h2>
+
+<p>Pensando nisso, foram criadas várias ferramentas para fazer análise por você. Seguem as principais e mais famosas:</p>
+
+<ul>
+  <li><a href="http://www.jslint.com/">JSlint</a></li>
+  <li><a href="http://jshint.com/">JSHint</a></li>
+  <li><a href="http://eslint.org/">Eslint</a></li>
+</ul>
+
+<p>Cada uma dessas ferramentas possui um módulo no npm e podem ser fácilmente instaladas.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm <span class="nb">install</span> <span class="nt">-g</span> jslint
+
+npm <span class="nb">install</span> <span class="nt">-g</span> jshint
+
+<span class="c">## para poder fazer lint de ES6 e JSX</span>
+npm <span class="nb">install</span> <span class="nt">-g</span> eslint
+npm <span class="nb">install</span> <span class="nt">-g</span> babel-eslint</code></pre></figure>
+
+<p>E todas elas também possuem integrações com vários editores de código como Sublime, Atom, Brackets, etc…</p>
+
+<h2 id="mas-como-elas-funcionam">Mas como elas funcionam?</h2>
+
+<p>Cada uma dessas ferramentas lê seus arquivos desejados e percorre pelos mesmos buscando por erros ou definições que as próprias consideram como má prática e para cada um dos erros, elas reportam ao final.</p>
+
+<p>Para os próximos passos, vou ensinar utilizando o <code class="highlighter-rouge">eslint</code>, que julgo o melhor dos Linters na atualidade, visto que ele dá um ótimo suporte a <code class="highlighter-rouge">ES6</code> e <code class="highlighter-rouge">JSX</code>, além do padrão do JS.</p>
+
+<p>Após instalado o <code class="highlighter-rouge">eslint</code>, vá até o diretório do seu projeto, digite <code class="highlighter-rouge">eslint --init</code> e responda as perguntas de acordo com sua necessidade, segue abaixo o print de um uso meu.</p>
+
+<p><img src="/assets/img/linter/eslint.png" alt="Print do eslint sendo usado" /></p>
+
+<p>Após isso, será criado um arquivo chamado <code class="highlighter-rouge">.eslintrc</code> dentro da pasta raiz do seu projeto, contendo informações parecidas com:</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">rules</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="dl">"</span><span class="s2">indent</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="mi">2</span><span class="p">,</span>
+            <span class="mi">4</span>
+        <span class="p">],</span>
+        <span class="dl">"</span><span class="s2">quotes</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="mi">2</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">single</span><span class="dl">"</span>
+        <span class="p">],</span>
+        <span class="dl">"</span><span class="s2">linebreak-style</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="mi">2</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">unix</span><span class="dl">"</span>
+        <span class="p">],</span>
+        <span class="dl">"</span><span class="s2">semi</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="mi">2</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">always</span><span class="dl">"</span>
+        <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="dl">"</span><span class="s2">env</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="dl">"</span><span class="s2">es6</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">browser</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">},</span>
+    <span class="dl">"</span><span class="s2">extends</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">eslint:recommended</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">ecmaFeatures</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="dl">"</span><span class="s2">jsx</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">experimentalObjectRestSpread</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">},</span>
+    <span class="dl">"</span><span class="s2">plugins</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span>
+    <span class="p">]</span>
+<span class="p">};</span></code></pre></figure>
+
+<p>Se você quiser entender tudo que ele escreveu ali, dá uma olhadinha na <a href="http://eslint.org/docs/user-guide/configuring">documentação</a> é super detalhada e bem explicada.</p>
+
+<p>Tendo já o arquivo, basta você rodar no terminal em cima do arquivo desejado e ele fará o report se algum erro acontecer, como, por exemplo, tendo um arquivo js:</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">use strict</span><span class="dl">'</span><span class="p">;</span>
+    
+    <span class="kd">const</span> <span class="nx">a</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">will</span><span class="dl">'</span><span class="p">;</span>
+
+    <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hello!</span><span class="dl">'</span><span class="p">)</span>
+    <span class="p">}</span>
+
+<span class="p">})()</span></code></pre></figure>
+
+<p>Se eu rodar o <code class="highlighter-rouge">eslint</code> no terminal analisando esse código, ele vai me retornar os seguintes erros:</p>
+
+<p><img src="/assets/img/linter/erro-1.png" alt="imagem mostrando os erros como variável não utilizada e falta de ponto e vírgula" /></p>
+
+<p>Eu criei uma variável <code class="highlighter-rouge">a</code>, mas nunca utilizei no meu código, eu usei console.log num código que vai para produção e ainda esqueci de colocar o ponto e vírgula no final do código!</p>
+
+<p>Para um código pequeno desses, talvez não fizesse diferença, mas pense num código beeeem maior, ele pode ser uma mão na roda =D</p>
+
+<p>Mas rodar isso o tempo todo no terminal é ruim, até mesmo se colocarmos num gulp/grunt da vida, o legal é mostrar no nosso editor. Se você usa Sublime Text, continua lendo aí, que vou mostrar a cereja do bolo!</p>
+
+<h2 id="usando-o-eslint-no-sublime">Usando o eslint no Sublime</h2>
+
+<p>Primeiro de tudo, espero que você tenha instalado o <a href="https://packagecontrol.io/installation">Package Control</a> no seu Sublime. Depois disso, mande instalar o <a href="http://sublimelinter.readthedocs.org/en/latest/installation.html#installing-via-pc">SublimeLinter</a> e o <a href="https://github.com/roadhump/SublimeLinter-eslint#plugin-installation">SublimeLinter-contrib-eslint</a>, que vão fazer toda a integração e mágica.</p>
+
+<p>Feito isso, reinicie o seu Sublime e comece a escrever seu código JS! Quando tiver algum erro, ele irá te notificar com marcadores ao lado do erro e na parte inferior irá te avisar o erro. Como na imagem abaixo:</p>
+
+<p><img src="/assets/img/linter/sublime.png" alt="Sublime indicando os erros" /></p>
+
+<p>Se você for como eu e quiser ver todos os erros numa lista e poder navegar entre eles, aperte <code class="highlighter-rouge">cmd + shift + p</code> ou <code class="highlighter-rouge">ctrl + shift + p</code> e digite <code class="highlighter-rouge">linter show</code> e você verá uma opção igual da tela abaixo:</p>
+
+<p><img src="/assets/img/linter/show.png" alt="Opção" /></p>
+
+<p>Com essa opção selecionada, cada vez que você salvar o código, irá ver uma lista da seguinte forma:</p>
+
+<p><img src="/assets/img/linter/errors-list.png" alt="Lista de erros" /></p>
+
+<h2 id="habilitando-o-sublime-para-entender-código-es6--eslint">Habilitando o Sublime para entender código ES6 + Eslint</h2>
+
+<p>Caso o seu Sublime não identifique ES6 junto com o Eslint e não faça o lint correto, basta que você instale o plugin do <a href="https://github.com/babel/babel-sublime">Babel</a> no seu Sublime. Com esse plugin instalado, defina que todos os arquivos JS e JSX serão interpretados como Babel, seguindo os seguintes passos:</p>
+
+<p>1) Abra um arquivo com a extensão JS ou JSX
+2) Vá na opção View do Menu
+3) Escolha Syntax -&gt; Open all with current extension as… -&gt; Babel -&gt; JavaScript (Babel).</p>
+
+<p>Feito isso, seu Sublime já vai entender aquele código em ES6 e o lint passará a funcionar! Agora vai lá e comece a programar com qualidade!</p>
+
+<p><img src="https://media.giphy.com/media/D4QLJVmdHB44g/giphy.gif" alt="John Kissing" /></p>
+
+<h2 id="conclusão">Conclusão</h2>
+
+<p>Bom, é basicamente isso, se preocupe com seu código e evite demorar horas procurando o erro se uma ferramenta pode fazer por você.</p>
+:ET

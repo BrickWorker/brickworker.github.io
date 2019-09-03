@@ -1,0 +1,132 @@
+I"s$<p>Já que estou participando da campanha do <a href="http://blog.da2k.com.br/">Fernando Daciuk</a> que é o <strong>#1postperday</strong>, resolvi criar uma outra hashtag, que será a <strong>#dicarapida</strong>. Como o próprio nome diz, serão dicas rápidas, mas que as vezes a gente não faz ou esquece ou ninguém falou por ser “bobo”.</p>
+
+<p>A minha ideia também será postar coisas em um nível também iniciante, assim ajuda uma galera nova, que está começando agora.</p>
+
+<h2 id="favicons">Favicons</h2>
+
+<p><img src="/assets/img/dica-rapida-1/favicons.png" alt="Favicons" /></p>
+
+<p>Pequenos e bastante simples, mas que já ajudam a identificar um site sem necessidade de mais nenhuma informação. Aposto que você sabe todos os sites que estão abertos na imagem acima =)</p>
+
+<p>Antigamente os favicons eram somente na extensão <code class="highlighter-rouge">.ico</code> e possuiam um tamanho padrão de <code class="highlighter-rouge">16x16</code>. E a partir da windows 7, com a possibilidade de se adicionar sites na barra de tarefas o tamanho foi passado para 3 versões:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">16x16</code>: tamanho na barra de endereço</li>
+  <li><code class="highlighter-rouge">32x32</code>: ícone na barra de tarefas ou atalhos</li>
+  <li><code class="highlighter-rouge">24x24</code>: favorito no browser</li>
+</ul>
+
+<p>Mas se você acha que irá precisar criar então 3 arquivos diferentes, se enganou, a extensão <code class="highlighter-rouge">.ico</code> permite ter várias dimensões em um mesmo arquivo. E se você quiser gerar automático, tem esse <a href="http://www.favicomatic.com/">site aqui</a>.</p>
+
+<h3 id="e-como-faço-isso-funcionar">E como faço isso funcionar?</h3>
+
+<p>Basta adicionar a seguinte <code class="highlighter-rouge">meta tag</code> no <code class="highlighter-rouge">head</code>:</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"shortcut icon"</span> <span class="na">href=</span><span class="s">"/img/icons/favicon.ico"</span> <span class="na">type=</span><span class="s">"image/x-icon"</span><span class="nt">&gt;</span></code></pre></figure>
+
+<p>Algumas pessoas apoiam utilizar um formato mais adaptável que é o <code class="highlighter-rouge">png</code> usando as novas meta tags com size, como mostrado no código abaixo:</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"icon"</span> <span class="na">type=</span><span class="s">"image/png"</span> <span class="na">href=</span><span class="s">"/favicon-16x16.png"</span> <span class="na">sizes=</span><span class="s">"16x16"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"icon"</span> <span class="na">type=</span><span class="s">"image/png"</span> <span class="na">href=</span><span class="s">"/favicon-32x32.png"</span> <span class="na">sizes=</span><span class="s">"32x32"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"icon"</span> <span class="na">type=</span><span class="s">"image/png"</span> <span class="na">href=</span><span class="s">"/favicon-96x96.png"</span> <span class="na">sizes=</span><span class="s">"96x96"</span><span class="nt">&gt;</span></code></pre></figure>
+
+<h3 id="mas-se-pode-usar-png-por-que-você-vem-me-falar-para-usar-o-formato-ico-que-é-velho">Mas se pode usar png, por que você vem me falar para usar o formato .ico que é velho??</h3>
+
+<p>Simples! Nesse caso, eu digo que em time que se está ganhando não se mexe. É utilizado já deve ter uns 10 anos e funciona com suporte para browser novo, velho, ATÉ NO IE FUNCIONA! Então deixa eles felizes com um ícone pelo menos.</p>
+
+<h2 id="touch-icons">Touch Icons</h2>
+
+<p>Com o advento dos devices da apple, ela decidiu criar meta-tags para lerem ícones de diferentes tamanhos e formatos, possibilitando uma qualidade maior quando o ícone fosse colocado na <em>home screen</em> ou favoritado no safari.</p>
+
+<p>De acordo com as versões do iOS e o aparelho, temos os seguintes tamanhos:</p>
+
+<table style="width: 800px">
+<tbody><tr>
+<th>Device</th>
+<th>Screen</th>
+<th>iOS version</th>
+<th>Icon size</th>
+</tr><tr>
+</tr><tr>
+<td rowspan="4">iPhone</td>
+<td rowspan="2">Classic</td>
+<td>6 and prior</td>
+<td>57x57</td>
+</tr>
+<tr>
+<td>7</td>
+<td>60x60</td>
+</tr>
+<tr>
+<td rowspan="2">Retina</td>
+<td>6 and prior</td>
+<td>114x114</td>
+</tr>
+<tr>
+<td>7</td>
+<td>120x120</td>
+</tr>
+<tr>
+<td rowspan="4">iPad</td>
+<td rowspan="2">Classic</td>
+<td>6 and prior</td>
+<td>72x72</td>
+</tr>
+<tr>
+<td>7</td>
+<td>76x76</td>
+</tr>
+<tr>
+<td rowspan="2">Retina</td>
+<td>6 and prior</td>
+<td>144x144</td>
+</tr>
+<tr>
+<td>7</td>
+<td>152x152</td>
+</tr>
+</tbody></table>
+
+<p>####JESUS, MARIA, JOSÉ, É IMAGEM PARA CARAMBA! NÃO VOU FAZER ISSO!</p>
+
+<p>Relaxa amigo, existem geradores na net, esses dois abaixo são muito bons:</p>
+
+<ul>
+  <li><a href="http://realfavicongenerator.net/">Real Favicon Generator</a></li>
+  <li><a href="http://iconogen.com/">Iconogen</a></li>
+</ul>
+
+<p>E como faço para os apps lerem isso aí?</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"apple-touch-icon"</span> <span class="na">sizes=</span><span class="s">"57x57"</span> <span class="na">href=</span><span class="s">"/apple-touch-icon-57x57.png"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"apple-touch-icon"</span> <span class="na">sizes=</span><span class="s">"114x114"</span> <span class="na">href=</span><span class="s">"/apple-touch-icon-114x114.png"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"apple-touch-icon"</span> <span class="na">sizes=</span><span class="s">"72x72"</span> <span class="na">href=</span><span class="s">"/apple-touch-icon-72x72.png"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"apple-touch-icon"</span> <span class="na">sizes=</span><span class="s">"144x144"</span> <span class="na">href=</span><span class="s">"/apple-touch-icon-144x144.png"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"apple-touch-icon"</span> <span class="na">sizes=</span><span class="s">"60x60"</span> <span class="na">href=</span><span class="s">"/apple-touch-icon-60x60.png"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"apple-touch-icon"</span> <span class="na">sizes=</span><span class="s">"120x120"</span> <span class="na">href=</span><span class="s">"/apple-touch-icon-120x120.png"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"apple-touch-icon"</span> <span class="na">sizes=</span><span class="s">"76x76"</span> <span class="na">href=</span><span class="s">"/apple-touch-icon-76x76.png"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"apple-touch-icon"</span> <span class="na">sizes=</span><span class="s">"152x152"</span> <span class="na">href=</span><span class="s">"/apple-touch-icon-152x152.png"</span><span class="nt">&gt;</span></code></pre></figure>
+
+<p>E prontinho, olha que legal, já funciona!!</p>
+
+<p><img src="/assets/img/dica-rapida-1/icon-apple-circle.png" alt="Imagem em um ipad" /></p>
+
+<h2 id="tile-icons">Tile Icons</h2>
+
+<p>Com o desenvolvimento do windows 8 e do surface, agora temos aquela interface flat e os ícones também mudaram. Para se adaptar a isso, a M$ também resolveu criar suas meta tags e passou a definí-las como <code class="highlighter-rouge">tiles</code>.</p>
+
+<p>Para fazer funcionar, basta adicionar as seguintes linhas no head:</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"msapplication-TileColor"</span> <span class="na">content=</span><span class="s">"#0562DC"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"msapplication-TileImage"</span> <span class="na">content=</span><span class="s">"/mstile-144x144.png"</span><span class="nt">&gt;</span></code></pre></figure>
+
+<h4 id="e-como-faço-para-testar-se-eu-não-uso-essa-porcaria-de-windows-8">E como faço para testar se eu não uso essa porcaria de windows 8?</h4>
+
+<p>Tem <a href="http://www.buildmypinnedsite.com/">esse site</a>, que cria o tile e ainda mostra um preview para você.</p>
+
+<h2 id="conclusão">Conclusão</h2>
+
+<p>Pequenos detalhes fazem grandes diferenças e passam de simples sites feitos por sobrinhos, para sites profissionais. Se liga, faz um trabalho legal e será recompensado.</p>
+
+<p>Fica aqui a primeira #dicarapida, quer que eu fale de algum assunto? Manda para <a href="https://twitter.com/Willian_justen">@willian_justen</a> com a hashtag ou comenta aqui embaixo.</p>
+:ET

@@ -1,0 +1,128 @@
+I"'<h2 id="cards-jekyll-template---demo">Cards Jekyll Template - <a href="http://willianjusten.com.br/cards-jekyll-template">Demo</a></h2>
+
+<p>This is a simple and minimalist template for Jekyll designed for developers that want to write blog posts but don’t want to care about frontend stuff.</p>
+
+<p>The Theme features:</p>
+
+<ul>
+  <li>Gulp</li>
+  <li>Stylus (Jeet, Rupture, Kouto Swiss)</li>
+  <li>Live Search</li>
+  <li>Offcanvas Menu</li>
+  <li>SVG icons</li>
+  <li>Very very small and fast!</li>
+  <li>Shell Script to create posts</li>
+  <li>Tags page</li>
+  <li>Series page</li>
+  <li>About Me page</li>
+  <li>Feed RSS</li>
+  <li>Sitemap.xml</li>
+  <li>Color Customization</li>
+  <li>Info Customization</li>
+</ul>
+
+<h2 id="basic-setup">Basic Setup</h2>
+
+<ol>
+  <li><a href="http://jekyllrb.com">Install Jekyll</a></li>
+  <li>Fork the <a href="https://github.com/willianjusten/will-jekyll-template/fork">Will Jekyll Template</a></li>
+  <li>Clone the repo you just forked.</li>
+  <li>Edit <code class="highlighter-rouge">_config.yml</code> to personalize your site.</li>
+  <li>Check out the sample posts in <code class="highlighter-rouge">_posts</code> to see examples for assigning categories and tags, and other YAML data.</li>
+  <li>Read the documentation below for further customization pointers and documentation.</li>
+  <li><strong>Remember to compile your assets files with Gulp.</strong></li>
+</ol>
+
+<h2 id="site-and-user-settings">Site and User Settings</h2>
+
+<p>You have to fill some informations on <code class="highlighter-rouge">_config.yml</code> to customize your site.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Site settings
+description: A blog about lorem ipsum dolor sit amet
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://localhost:3000" # the base hostname &amp; protocol for your site 
+
+# User settings
+username: Lorem Ipsum
+user_description: Anon Developer at Lorem Ipsum Dolor
+user_title: Anon Developer
+email: anon@anon.com
+twitter_username: lorem_ipsum
+github_username:  lorem_ipsum
+gplus_username:  lorem_ipsum
+disqus_username: lorem_ipsum
+</code></pre></div></div>
+
+<h2 id="header-name">Header Name</h2>
+
+<p>To use the power of CSS Content and media query, the header name is defined on <a href="">src/styl/_header.styl</a>. Change to your prefered name.</p>
+
+<h2 id="color-customization">Color customization</h2>
+
+<p>All color variables are in <code class="highlighter-rouge">src/styl/variable</code>. To change the main color, just set the new value at <code class="highlighter-rouge">main</code> assignment. Another colors are for texts and the code background color.</p>
+
+<h2 id="theme-colors">Theme Colors</h2>
+
+<p>Every post has a main color that is defined on <a href="">src/styl/_theme-colors.styl</a>. Just create a new color with the prefix <code class="highlighter-rouge">post-</code> and define your main-class: ‘css’ and color: ‘#2DA0C3’ on every post you create.</p>
+
+<h2 id="creating-posts">Creating posts</h2>
+
+<p>You can use the <code class="highlighter-rouge">initpost.sh</code> to create your new posts. Just follow the command:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./initpost.sh -c Post Title
+</code></pre></div></div>
+
+<p>The new file will be created at <code class="highlighter-rouge">_posts</code> with this format <code class="highlighter-rouge">date-title.md</code>.</p>
+
+<h2 id="front-matter">Front-matter</h2>
+
+<p>When you create a new post, you need to fill the post information in the front-matter, follow this example:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
+layout: post
+title: "Falando sobre RSCSS"
+date: 2016-02-07 18:48:16
+image: '/assets/img/rscss/rscss.png'
+description: 'Escrevendo CSS sem perder a sanidade. Aprenda uma metodologia que pode salvar muitas dores de cabeça.'
+main-class: 'css'
+color: '#2DA0C3'
+tags:
+- css
+- metodologia
+- frontend
+categories:
+twitter_text: 'Escrevendo CSS sem perder a sanidade.'
+introduction: 'Escrevendo CSS sem perder a sanidade. Com essa introdução, Rico St. Cruz o criador chama a atenção de todos sobre uma metodologia melhor para se escrever CSS.'
+---
+</code></pre></div></div>
+
+<h2 id="running-the-blog-in-local">Running the blog in local</h2>
+
+<p>In order to compile the assets and run Jekyll on local you need to follow those steps:</p>
+
+<ul>
+  <li>Install <a href="https://nodejs.org/">NodeJS</a></li>
+  <li>Run <code class="highlighter-rouge">npm install</code></li>
+  <li>Run <code class="highlighter-rouge">gulp</code></li>
+</ul>
+
+<h2 id="windows-10-step">Windows 10 Step</h2>
+
+<p>If you use Windows 10, change this line on <a href="https://github.com/willianjusten/will-jekyll-template/blob/gh-pages/gulpfile.js#L23">gulpfile.js</a> to <code class="highlighter-rouge">spawn('jekyll.bat', ['build'])</code>.</p>
+
+<h2 id="questions">Questions</h2>
+
+<p>Having a problem getting something to work or want to know why I setup something in a certain way? Ping me on Twitter <a href="https://twitter.com/willian_justen">@willian_justen</a> or file a <a href="https://github.com/willianjusten/will-jekyll-template/issues/new">GitHub Issue</a>.</p>
+
+<h2 id="donation">Donation</h2>
+
+<p>If you liked my work, buy me a coffee &lt;3</p>
+
+<p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=UTMFZUHX6EUGE"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" alt="paypal" /></a></p>
+
+<h2 id="license">License</h2>
+
+<p>This theme is free and open source software, distributed under the The MIT License. So feel free to use this Jekyll theme on your site without linking back to me or using a disclaimer.</p>
+
+<p>If you’d like to give me credit somewhere on your blog or tweet a shout out to <a href="https://twitter.com/willian_justen">@willian_justen</a>, that would be pretty sweet.</p>
+:ET

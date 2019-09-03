@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    
+        <url>
+            <loc>http://localhost:4000/cards-jekyll-template/about/index.html</loc>
+        </url>
+    
+        <url>
+            <loc>http://localhost:4000/cards-jekyll-template/category/css/</loc>
+        </url>
+    
+        <url>
+            <loc>http://localhost:4000/cards-jekyll-template/category/dev/</loc>
+        </url>
+    
+        <url>
+            <loc>http://localhost:4000/cards-jekyll-template/feed.xml</loc>
+        </url>
+    
+        <url>
+            <loc>http://localhost:4000/cards-jekyll-template/category/html/</loc>
+        </url>
+    
+        <url>
+            <loc>http://localhost:4000/cards-jekyll-template/</loc>
+        </url>
+    
+        <url>
+            <loc>http://localhost:4000/cards-jekyll-template/category/jekyll/</loc>
+        </url>
+    
+        <url>
+            <loc>http://localhost:4000/cards-jekyll-template/category/js/</loc>
+        </url>
+    
+        <url>
+            <loc>http://localhost:4000/cards-jekyll-template/category/misc/</loc>
+        </url>
+    
+        <url>
+            <loc>http://localhost:4000/cards-jekyll-template/search.json</loc>
+        </url>
+    
+        <url>
+            <loc>http://localhost:4000/cards-jekyll-template/series/index.html</loc>
+        </url>
+    
+        <url>
+            <loc>http://localhost:4000/cards-jekyll-template/sitemap.xml</loc>
+        </url>
+    
+        <url>
+            <loc>http://localhost:4000/cards-jekyll-template/category/svg/</loc>
+        </url>
+    
+        <url>
+            <loc>http://localhost:4000/cards-jekyll-template/tags/index.html</loc>
+        </url>
+    
+    
+        <url>
+            <loc>http://localhost:4000/cards-jekyll-template/how-to-use/</loc>
+        </url>
+  
+        <url>
+            <loc>http://localhost:4000/cards-jekyll-template/welcome-to-jekyll/</loc>
+        </url>
+  
+        <url>
+            <loc>http://localhost:4000/cards-jekyll-template/analisando-seu-codigo-js-com-linter/</loc>
+        </url>
+  
+        <url>
+            <loc>http://localhost:4000/cards-jekyll-template/social-meta-tags/</loc>
+        </url>
+  
+        <url>
+            <loc>http://localhost:4000/cards-jekyll-template/por-que-usar-svg/</loc>
+        </url>
+  
+        <url>
+            <loc>http://localhost:4000/cards-jekyll-template/dica-rapida-1/</loc>
+        </url>
+  
+</urlset>

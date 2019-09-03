@@ -1,13 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Willian Justen - Desenvolvedor Front End</title>
-    <description>A blog about lorem ipsum dolor sit amet</description>
+    <title>brickwokers` home</title>
+    <description>A blog about source learning</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 03 Sep 2019 15:57:08 +0800</pubDate>
-    <lastBuildDate>Tue, 03 Sep 2019 15:57:08 +0800</lastBuildDate>
+    <pubDate>Tue, 03 Sep 2019 17:02:14 +0800</pubDate>
+    <lastBuildDate>Tue, 03 Sep 2019 17:02:14 +0800</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>Post Dubbo源码入门</title>
+        <description>&lt;h2 id=&quot;dubbo源码入门&quot;&gt;Dubbo源码入门&lt;/h2&gt;
+
+&lt;h4 id=&quot;1简介&quot;&gt;1、简介&lt;/h4&gt;
+
+&lt;p&gt;在熟悉Dubbo源码之前，我们先认识一下java的SPI（Service Provider Interface）机制，这是一种服务发现机制。其本质是将接口实现类的权限定名配置在文件中，并由服务加载器读取配置文件，加载实现类。&lt;/p&gt;
+
+&lt;h4 id=&quot;2spi示例&quot;&gt;2、SPI示例&lt;/h4&gt;
+
+&lt;p&gt;step1&lt;/p&gt;
+
+&lt;p&gt;创建一个maven应用，&lt;/p&gt;
+</description>
+        <pubDate>Tue, 03 Sep 2019 16:50:54 +0800</pubDate>
+        <link>http://localhost:4000/post-dubbo%E6%BA%90%E7%A0%81%E5%85%A5%E9%97%A8/</link>
+        <guid isPermaLink="true">http://localhost:4000/post-dubbo%E6%BA%90%E7%A0%81%E5%85%A5%E9%97%A8/</guid>
+        
+        <category>Dubbo</category>
+        
+        
+      </item>
     
       <item>
         <title>How to Use</title>

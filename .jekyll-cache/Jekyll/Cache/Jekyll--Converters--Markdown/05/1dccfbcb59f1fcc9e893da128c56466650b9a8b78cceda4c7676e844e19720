@@ -1,0 +1,12 @@
+I"�<h2 id="dubbo源码入门">Dubbo源码入门</h2>
+
+<h4 id="1简介">1、简介</h4>
+
+<p>在熟悉Dubbo源码之前，我们先认识一下java的SPI（Service Provider Interface）机制，这是一种服务发现机制。其本质是将接口实现类的权限定名配置在文件中，并由服务加载器读取配置文件，加载实现类。</p>
+
+<h4 id="2spi示例">2、SPI示例</h4>
+
+<p>step1</p>
+
+<p>创建一个maven应用，</p>
+:ET

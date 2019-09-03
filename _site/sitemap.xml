@@ -59,6 +59,10 @@
     
     
         <url>
+            <loc>http://localhost:4000/post-dubbo%E6%BA%90%E7%A0%81%E5%85%A5%E9%97%A8/</loc>
+        </url>
+  
+        <url>
             <loc>http://localhost:4000/how-to-use/</loc>
         </url>
   

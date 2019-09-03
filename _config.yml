@@ -1,17 +1,17 @@
 # Site settings
-title: Willian Justen - Desenvolvedor Front End
-description: A blog about lorem ipsum dolor sit amet
+title: brickwokers` home
+description: A blog about source learning
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://www.brickworkers.com" # the base hostname & protocol for your site e.g. http://willianjusten.com.br
 
 # User settings
-username: Lorem Ipsum
-user_description: Anon Developer at Lorem Ipsum Dolor
-email: anon@anon.com
-twitter_username: lorem_ipsum
-github_username:  lorem_ipsum
-gplus_username:  lorem_ipsum
-disqus_username: lorem_ipsum
+username: Brickworker
+user_description: Anon Developer at JAVA、GO
+email: 297988405@qq.com
+twitter_username: none
+github_username:  BrickWorker
+gplus_username:  none
+disqus_username: none
 
 # Build settings
 markdown: kramdown
@@ -29,13 +29,13 @@ compress_html:
 # Links to include in menu navigation
 # For external links add external: true
 links:
-  - title: Home
+  - title: 主页
     url: /
-  - title: Series
+  - title: 系列文章
     url: /series
-  - title: Tags
+  - title: 标签
     url: /tags
-  - title: About Me
+  - title: 关于我
     url: /about
 
 # exclude my node related stuff

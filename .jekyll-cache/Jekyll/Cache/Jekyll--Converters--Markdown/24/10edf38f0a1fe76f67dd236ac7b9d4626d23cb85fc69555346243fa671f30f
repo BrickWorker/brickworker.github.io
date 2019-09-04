@@ -1,0 +1,404 @@
+I"�<h3 id="spring之applicationlistener">Spring之ApplicationListener</h3>
+
+<h4 id="背景">背景</h4>
+
+<p>spring内置的一种观察者模式实现。涉及到的身份有三种：Event、publisher、Listener。当发布者发布一个事件，那么listener会观察到这个事件的发布，并执行自己相应的逻辑。</p>
+
+<p>在实际的业务开发中，是一种非常好的解耦方式，有点消息的味道。比如我们应用中存在一个”新用户注册发放积分“的需求，可以做一个用户注册事件，当新用户注册时，发布一个新用户注册事件，由监听器去做积分发放的逻辑。</p>
+
+<h4 id="身份源码简介">身份源码简介</h4>
+
+<p>前面我们有聊到，主要涉及到三种身份，接下来我们分别看看这些身份下都有些什么能力（方法）。</p>
+
+<p>*Publisher</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ApplicationEventPublisher</span> <span class="o">{</span>
+
+	<span class="cm">/**
+	 * Notify all &lt;strong&gt;matching&lt;/strong&gt; listeners registered with this
+	 * application of an application event. Events may be framework events
+	 * (such as RequestHandledEvent) or application-specific events.
+	 * @param event the event to publish
+	 * @see org.springframework.web.context.support.RequestHandledEvent
+	 */</span>
+	<span class="kt">void</span> <span class="nf">publishEvent</span><span class="o">(</span><span class="nc">ApplicationEvent</span> <span class="n">event</span><span class="o">);</span>
+
+	<span class="cm">/**
+	 * Notify all &lt;strong&gt;matching&lt;/strong&gt; listeners registered with this
+	 * application of an event.
+	 * &lt;p&gt;If the specified {@code event} is not an {@link ApplicationEvent},
+	 * it is wrapped in a {@link PayloadApplicationEvent}.
+	 * @param event the event to publish
+	 * @since 4.2
+	 * @see PayloadApplicationEvent
+	 */</span>
+	<span class="kt">void</span> <span class="nf">publishEvent</span><span class="o">(</span><span class="nc">Object</span> <span class="n">event</span><span class="o">);</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>发布者的能力非常精准，就是发布一个事件。同时重载了一个方法，可以发布一个对象，不过在过程中这个对象会被包装到PayloadApplicationEvent当中</p>
+
+<p>*Event</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">ApplicationEvent</span> <span class="kd">extends</span> <span class="nc">EventObject</span> <span class="o">{</span>
+
+	<span class="cm">/** use serialVersionUID from Spring 1.2 for interoperability */</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">7099057708183571937L</span><span class="o">;</span>
+
+	<span class="cm">/** System time when the event happened */</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">timestamp</span><span class="o">;</span>
+
+
+	<span class="cm">/**
+	 * Create a new ApplicationEvent.
+	 * @param source the object on which the event initially occurred (never {@code null})
+	 */</span>
+	<span class="kd">public</span> <span class="nf">ApplicationEvent</span><span class="o">(</span><span class="nc">Object</span> <span class="n">source</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kd">super</span><span class="o">(</span><span class="n">source</span><span class="o">);</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">timestamp</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+	<span class="o">}</span>
+
+
+	<span class="cm">/**
+	 * Return the system time in milliseconds when the event happened.
+	 */</span>
+	<span class="kd">public</span> <span class="kd">final</span> <span class="kt">long</span> <span class="nf">getTimestamp</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">timestamp</span><span class="o">;</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+
+<span class="o">----------------</span><span class="nc">EventObject</span><span class="o">---------------</span>
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">EventObject</span> <span class="kd">implements</span> <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">Serializable</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">5516075349620653480L</span><span class="o">;</span>
+
+    <span class="cm">/**
+     * The object on which the Event initially occurred.
+     */</span>
+    <span class="kd">protected</span> <span class="kd">transient</span> <span class="nc">Object</span> <span class="n">source</span><span class="o">;</span>
+
+    <span class="cm">/**
+     * Constructs a prototypical Event.
+     *
+     * @param source the object on which the Event initially occurred
+     * @throws IllegalArgumentException if source is null
+     */</span>
+    <span class="kd">public</span> <span class="nf">EventObject</span><span class="o">(</span><span class="nc">Object</span> <span class="n">source</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">source</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalArgumentException</span><span class="o">(</span><span class="s">"null source"</span><span class="o">);</span>
+
+        <span class="k">this</span><span class="o">.</span><span class="na">source</span> <span class="o">=</span> <span class="n">source</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+  <span class="o">}</span>
+</code></pre></div></div>
+
+<p>Event其实也非常简单，他就是包含了一个不可被序列化的Object。</p>
+
+<p>*Listener</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ApplicationListener</span><span class="o">&lt;</span><span class="no">E</span> <span class="kd">extends</span> <span class="nc">ApplicationEvent</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="nc">EventListener</span> <span class="o">{</span>
+
+	<span class="cm">/**
+	 * Handle an application event.
+	 * @param event the event to respond to
+	 */</span>
+	<span class="kt">void</span> <span class="nf">onApplicationEvent</span><span class="o">(</span><span class="no">E</span> <span class="n">event</span><span class="o">);</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>EventListener是一个标志接口，标志接口一般都是某一类身份的判断，不具备任何属性和方法。在监听器中，只有一个onApplicationEvent方法，这个方法其实就是时间发生时被调用的服务。后续我们会分析一整套的调用逻辑。</p>
+
+<p>至此，我们对今天要聊的时间发布监听有个大致的了解，对每个身份是什么，做什么也有了一定的了解。接下来，我们深入spring的源码，分析一个事件发布到监听执行到底是如何实现的。</p>
+
+<h4 id="以contextrefreshedevent为例介绍事件发布监听">以ContextRefreshedEvent为例介绍事件发布监听</h4>
+
+<p>ContextRefreshedEvent是ApplicationEvent的具体实现，这个事件表示当一个应用容器，spring中容器我们一般称之为Context，这个容器被初始化或者刷新时触发。一下是它的源码，比较简单：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ContextRefreshedEvent</span> <span class="kd">extends</span> <span class="nc">ApplicationContextEvent</span> <span class="o">{</span>
+
+	<span class="cm">/**
+	 * Create a new ContextRefreshedEvent.
+	 * @param source the {@code ApplicationContext} that has been initialized
+	 * or refreshed (must not be {@code null})
+	 */</span>
+	<span class="kd">public</span> <span class="nf">ContextRefreshedEvent</span><span class="o">(</span><span class="nc">ApplicationContext</span> <span class="n">source</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kd">super</span><span class="o">(</span><span class="n">source</span><span class="o">);</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>我们前面介绍了很多，我们知道整体流程的入口就在Publisher中，我们定位到ApplicationEventPublisher的骨架实现，我们发现其实是通过Spring容器Context来实现的发布接口，代码如下：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">AbstractApplicationContext</span> <span class="kd">extends</span> <span class="nc">DefaultResourceLoader</span>
+		<span class="kd">implements</span> <span class="nc">ConfigurableApplicationContext</span><span class="o">,</span> <span class="nc">DisposableBean</span> <span class="o">{</span>
+		
+		<span class="c1">// 事件发布</span>
+<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">publishEvent</span><span class="o">(</span><span class="nc">Object</span> <span class="n">event</span><span class="o">,</span> <span class="nc">ResolvableType</span> <span class="n">eventType</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">Assert</span><span class="o">.</span><span class="na">notNull</span><span class="o">(</span><span class="n">event</span><span class="o">,</span> <span class="s">"Event must not be null"</span><span class="o">);</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">logger</span><span class="o">.</span><span class="na">isTraceEnabled</span><span class="o">())</span> <span class="o">{</span>
+			<span class="n">logger</span><span class="o">.</span><span class="na">trace</span><span class="o">(</span><span class="s">"Publishing event in "</span> <span class="o">+</span> <span class="n">getDisplayName</span><span class="o">()</span> <span class="o">+</span> <span class="s">": "</span> <span class="o">+</span> <span class="n">event</span><span class="o">);</span>
+		<span class="o">}</span>
+
+		<span class="c1">// Decorate event as an ApplicationEvent if necessary</span>
+		<span class="c1">// 装饰事件</span>
+		<span class="nc">ApplicationEvent</span> <span class="n">applicationEvent</span><span class="o">;</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">event</span> <span class="k">instanceof</span> <span class="nc">ApplicationEvent</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">applicationEvent</span> <span class="o">=</span> <span class="o">(</span><span class="nc">ApplicationEvent</span><span class="o">)</span> <span class="n">event</span><span class="o">;</span>
+		<span class="o">}</span>
+		<span class="k">else</span> <span class="o">{</span>
+		<span class="c1">// 如果发布的是一个Object，那么用PayloadApplicationEvent来封装它</span>
+			<span class="n">applicationEvent</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PayloadApplicationEvent</span><span class="o">&lt;</span><span class="nc">Object</span><span class="o">&gt;(</span><span class="k">this</span><span class="o">,</span> <span class="n">event</span><span class="o">);</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">eventType</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+				<span class="n">eventType</span> <span class="o">=</span> <span class="o">((</span><span class="nc">PayloadApplicationEvent</span><span class="o">)</span> <span class="n">applicationEvent</span><span class="o">).</span><span class="na">getResolvableType</span><span class="o">();</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+
+		<span class="c1">// Multicast right now if possible - or lazily once the multicaster is initialized</span>
+		<span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">earlyApplicationEvents</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">this</span><span class="o">.</span><span class="na">earlyApplicationEvents</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">applicationEvent</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="k">else</span> <span class="o">{</span>
+		<span class="c1">// 获取时间多播器，并且广播事件</span>
+			<span class="n">getApplicationEventMulticaster</span><span class="o">().</span><span class="na">multicastEvent</span><span class="o">(</span><span class="n">applicationEvent</span><span class="o">,</span> <span class="n">eventType</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+	
+	<span class="o">}</span>
+</code></pre></div></div>
+
+<p>上面这部分代码核心就是”获取时间多播器，并进行广播“。我们进入#getApplicationEventMulticaster()的详细代码：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="cm">/**
+	 * Return the internal ApplicationEventMulticaster used by the context.
+	 * @return the internal ApplicationEventMulticaster (never {@code null})
+	 * @throws IllegalStateException if the context has not been initialized yet
+	 */</span>
+	<span class="nc">ApplicationEventMulticaster</span> <span class="nf">getApplicationEventMulticaster</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">IllegalStateException</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">applicationEventMulticaster</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalStateException</span><span class="o">(</span><span class="s">"ApplicationEventMulticaster not initialized - "</span> <span class="o">+</span>
+					<span class="s">"call 'refresh' before multicasting events via the context: "</span> <span class="o">+</span> <span class="k">this</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">applicationEventMulticaster</span><span class="o">;</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+
+<p>applicationEventMulticaster这个东西的初始换是伴随着容器初始化完成的，并为容器所使用。获取了ApplicationEventMuticaster，接下来就可以进行广播了，我们先看下这个接口所支持的方法：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ApplicationEventMulticaster</span> <span class="o">{</span>
+
+	<span class="cm">/**
+	 * Add a listener to be notified of all events.
+	 * @param listener the listener to add
+	 */</span>
+	<span class="kt">void</span> <span class="nf">addApplicationListener</span><span class="o">(</span><span class="nc">ApplicationListener</span><span class="o">&lt;?&gt;</span> <span class="n">listener</span><span class="o">);</span>
+
+	<span class="cm">/**
+	 * Add a listener bean to be notified of all events.
+	 * @param listenerBeanName the name of the listener bean to add
+	 */</span>
+	<span class="kt">void</span> <span class="nf">addApplicationListenerBean</span><span class="o">(</span><span class="nc">String</span> <span class="n">listenerBeanName</span><span class="o">);</span>
+
+	<span class="cm">/**
+	 * Remove a listener from the notification list.
+	 * @param listener the listener to remove
+	 */</span>
+	<span class="kt">void</span> <span class="nf">removeApplicationListener</span><span class="o">(</span><span class="nc">ApplicationListener</span><span class="o">&lt;?&gt;</span> <span class="n">listener</span><span class="o">);</span>
+
+	<span class="cm">/**
+	 * Remove a listener bean from the notification list.
+	 * @param listenerBeanName the name of the listener bean to add
+	 */</span>
+	<span class="kt">void</span> <span class="nf">removeApplicationListenerBean</span><span class="o">(</span><span class="nc">String</span> <span class="n">listenerBeanName</span><span class="o">);</span>
+
+	<span class="cm">/**
+	 * Remove all listeners registered with this multicaster.
+	 * &lt;p&gt;After a remove call, the multicaster will perform no action
+	 * on event notification until new listeners are being registered.
+	 */</span>
+	<span class="kt">void</span> <span class="nf">removeAllListeners</span><span class="o">();</span>
+
+	<span class="cm">/**
+	 * Multicast the given application event to appropriate listeners.
+	 * &lt;p&gt;Consider using {@link #multicastEvent(ApplicationEvent, ResolvableType)}
+	 * if possible as it provides a better support for generics-based events.
+	 * @param event the event to multicast
+	 */</span>
+	<span class="kt">void</span> <span class="nf">multicastEvent</span><span class="o">(</span><span class="nc">ApplicationEvent</span> <span class="n">event</span><span class="o">);</span>
+
+	<span class="cm">/**
+	 * Multicast the given application event to appropriate listeners.
+	 * &lt;p&gt;If the {@code eventType} is {@code null}, a default type is built
+	 * based on the {@code event} instance.
+	 * @param event the event to multicast
+	 * @param eventType the type of event (can be null)
+	 * @since 4.2
+	 */</span>
+	<span class="kt">void</span> <span class="nf">multicastEvent</span><span class="o">(</span><span class="nc">ApplicationEvent</span> <span class="n">event</span><span class="o">,</span> <span class="nc">ResolvableType</span> <span class="n">eventType</span><span class="o">);</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>从这个接口来看，我们大致知道这个接口功能大致是：</p>
+
+<p>1、维护所有的监听器Listener</p>
+
+<p>2、广播事件到对应的监听器</p>
+
+<p>接下来看它的multicastEvent的具体实现</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">multicastEvent</span><span class="o">(</span><span class="kd">final</span> <span class="nc">ApplicationEvent</span> <span class="n">event</span><span class="o">,</span> <span class="nc">ResolvableType</span> <span class="n">eventType</span><span class="o">)</span> <span class="o">{</span>
+	<span class="c1">// 类型转换相关	</span>
+  <span class="nc">ResolvableType</span> <span class="n">type</span> <span class="o">=</span> <span class="o">(</span><span class="n">eventType</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">eventType</span> <span class="o">:</span> <span class="n">resolveDefaultEventType</span><span class="o">(</span><span class="n">event</span><span class="o">));</span>
+  <span class="c1">// 获取所有该事件相关的所有监听器</span>
+		<span class="k">for</span> <span class="o">(</span><span class="kd">final</span> <span class="nc">ApplicationListener</span><span class="o">&lt;?&gt;</span> <span class="n">listener</span> <span class="o">:</span> <span class="n">getApplicationListeners</span><span class="o">(</span><span class="n">event</span><span class="o">,</span> <span class="n">type</span><span class="o">))</span> <span class="o">{</span>
+      <span class="c1">// 支持异步消息推送</span>
+			<span class="nc">Executor</span> <span class="n">executor</span> <span class="o">=</span> <span class="n">getTaskExecutor</span><span class="o">();</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">executor</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+				<span class="n">executor</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
+					<span class="nd">@Override</span>
+					<span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+						<span class="n">invokeListener</span><span class="o">(</span><span class="n">listener</span><span class="o">,</span> <span class="n">event</span><span class="o">);</span>
+					<span class="o">}</span>
+				<span class="o">});</span>
+			<span class="o">}</span>
+			<span class="k">else</span> <span class="o">{</span>
+        <span class="c1">// 同步推送</span>
+				<span class="n">invokeListener</span><span class="o">(</span><span class="n">listener</span><span class="o">,</span> <span class="n">event</span><span class="o">);</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+
+<p>广播事件的时候主要做了以下几件事情：</p>
+
+<p>1、获取该事件相关的监听器</p>
+
+<p>2、判断是否需要异步执行</p>
+
+<p>3、把事件推送给listenner</p>
+
+<p>接下来我们看最后一步，#invokeListener方法</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">protected</span> <span class="kt">void</span> <span class="nf">invokeListener</span><span class="o">(</span><span class="nc">ApplicationListener</span><span class="o">&lt;?&gt;</span> <span class="n">listener</span><span class="o">,</span> <span class="nc">ApplicationEvent</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span>
+  <span class="c1">// 是否有配置错误处理</span>
+		<span class="nc">ErrorHandler</span> <span class="n">errorHandler</span> <span class="o">=</span> <span class="n">getErrorHandler</span><span class="o">();</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">errorHandler</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">try</span> <span class="o">{</span>
+				<span class="n">doInvokeListener</span><span class="o">(</span><span class="n">listener</span><span class="o">,</span> <span class="n">event</span><span class="o">);</span>
+			<span class="o">}</span>
+			<span class="k">catch</span> <span class="o">(</span><span class="nc">Throwable</span> <span class="n">err</span><span class="o">)</span> <span class="o">{</span>
+				<span class="n">errorHandler</span><span class="o">.</span><span class="na">handleError</span><span class="o">(</span><span class="n">err</span><span class="o">);</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+		<span class="k">else</span> <span class="o">{</span>
+			<span class="n">doInvokeListener</span><span class="o">(</span><span class="n">listener</span><span class="o">,</span> <span class="n">event</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+
+<span class="o">----------</span><span class="err">#</span><span class="n">doInvokeListener</span><span class="o">----------</span>
+  <span class="kd">private</span> <span class="kt">void</span> <span class="nf">doInvokeListener</span><span class="o">(</span><span class="nc">ApplicationListener</span> <span class="n">listener</span><span class="o">,</span> <span class="nc">ApplicationEvent</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+      <span class="c1">// 执行listener的onApplicationEvent方法</span>
+			<span class="n">listener</span><span class="o">.</span><span class="na">onApplicationEvent</span><span class="o">(</span><span class="n">event</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="k">catch</span> <span class="o">(</span><span class="nc">ClassCastException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">String</span> <span class="n">msg</span> <span class="o">=</span> <span class="n">ex</span><span class="o">.</span><span class="na">getMessage</span><span class="o">();</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">msg</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">matchesClassCastMessage</span><span class="o">(</span><span class="n">msg</span><span class="o">,</span> <span class="n">event</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">getName</span><span class="o">()))</span> <span class="o">{</span>
+				<span class="c1">// Possibly a lambda-defined listener which we could not resolve the generic event type for</span>
+				<span class="c1">// -&gt; let's suppress the exception and just log a debug message.</span>
+				<span class="nc">Log</span> <span class="n">logger</span> <span class="o">=</span> <span class="nc">LogFactory</span><span class="o">.</span><span class="na">getLog</span><span class="o">(</span><span class="n">getClass</span><span class="o">());</span>
+				<span class="k">if</span> <span class="o">(</span><span class="n">logger</span><span class="o">.</span><span class="na">isDebugEnabled</span><span class="o">())</span> <span class="o">{</span>
+					<span class="n">logger</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"Non-matching event type for listener: "</span> <span class="o">+</span> <span class="n">listener</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+				<span class="o">}</span>
+			<span class="o">}</span>
+			<span class="k">else</span> <span class="o">{</span>
+				<span class="k">throw</span> <span class="n">ex</span><span class="o">;</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+
+<p>这个方法非常简单：</p>
+
+<p>1、判断是否有异常处理的Handler，这个handler可以自己配置，主要是针对异步情况下的异常处理</p>
+
+<p>2、执行listenner的onApplicationEvent方法</p>
+
+<p>至此，整套事件发布监听的逻辑就结束了。下面演示一下实战：</p>
+
+<p>每一个用户注册，我们需要给用户发放100优惠券，我们通过事件发布监听的方式去实现：</p>
+
+<p>1、设置一个用户注册事件</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserRegisterEvent</span> <span class="kd">extends</span> <span class="nc">ApplicationEvent</span> <span class="o">{</span>
+
+    <span class="cm">/**
+     * 表示一个用户
+     */</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">userId</span><span class="o">;</span>
+     <span class="kd">public</span> <span class="nf">UserRegisterEvent</span><span class="o">(</span><span class="nc">Object</span> <span class="n">source</span><span class="o">,</span> <span class="nc">String</span> <span class="n">userId</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">source</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">userId</span> <span class="o">=</span> <span class="n">userId</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="cm">/**
+     * Create a new ApplicationEvent.
+     *
+     * @param source the object on which the event initially occurred (never {@code null})
+     */</span>
+    <span class="kd">public</span> <span class="nf">UserRegisterEvent</span><span class="o">(</span><span class="nc">Object</span> <span class="n">source</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">source</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getUserId</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">userId</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUserId</span><span class="o">(</span><span class="nc">String</span> <span class="n">userId</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">userId</span> <span class="o">=</span> <span class="n">userId</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>2、设置一个监听器</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 需要把listener交给spring容器进行管理</span>
+<span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserRegisterListener</span> <span class="kd">implements</span> <span class="nc">ApplicationListener</span><span class="o">&lt;</span><span class="nc">UserRegisterEvent</span><span class="o">&gt;</span> <span class="o">{</span>
+
+    <span class="cm">/**
+     * Handle an application event.
+     *
+     * @param event the event to respond to
+     */</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onApplicationEvent</span><span class="o">(</span><span class="nc">UserRegisterEvent</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"user %s get 100 ticket"</span><span class="o">,</span> <span class="n">event</span><span class="o">.</span><span class="na">getUserId</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<p>3、事件发布，我们用spring的publisher发布消息</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+      <span class="c1">// 主动启动容器</span>
+        <span class="nc">ClassPathXmlApplicationContext</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ClassPathXmlApplicationContext</span><span class="o">(</span><span class="k">new</span> <span class="nc">String</span><span class="o">[]{</span><span class="s">"META-INF/spring/dubbo-demo-provider.xml"</span><span class="o">});</span>
+        <span class="n">context</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"有用户注册"</span><span class="o">);</span>
+        <span class="n">context</span><span class="o">.</span><span class="na">publishEvent</span><span class="o">(</span><span class="k">new</span> <span class="nc">UserRegisterEvent</span><span class="o">(</span><span class="k">new</span> <span class="nc">Object</span><span class="o">(),</span> <span class="s">"297988405"</span><span class="o">));</span>
+
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>4、运行结果</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">有用户注册</span>
+<span class="n">user</span> <span class="mi">297988405</span> <span class="n">get</span> <span class="mi">100</span> <span class="n">ticket</span>
+</code></pre></div></div>
+
+:ET

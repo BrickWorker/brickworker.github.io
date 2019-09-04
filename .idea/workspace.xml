@@ -2,30 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="49bd516d-c840-49b8-9e4c-1c664e93d99a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Cache/b7/9606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Cache/b7/9606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_includes/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/footer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/about/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/about/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/analisando-seu-codigo-js-com-linter/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/analisando-seu-codigo-js-com-linter/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/assets/img/icons/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/_site/assets/img/icons/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/category/css/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/category/css/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/category/dev/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/category/dev/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/category/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/category/html/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/category/jekyll/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/category/jekyll/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/category/js/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/category/js/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/category/misc/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/category/misc/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/category/svg/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/category/svg/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/dica-rapida-1/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/dica-rapida-1/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/feed.xml" beforeDir="false" afterPath="$PROJECT_DIR$/_site/feed.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/how-to-use/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/how-to-use/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/por-que-usar-svg/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/por-que-usar-svg/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/series/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/series/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/social-meta-tags/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/social-meta-tags/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/tags/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/tags/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/welcome-to-jekyll/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/welcome-to-jekyll/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/img/icons/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/assets/img/icons/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/css/1、芒果店长应用类型问题" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/blog-author.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/img/blog-author.jpg" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,8 +18,8 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1888" />
-    <option name="y" value="35" />
+    <option name="x" value="-1884" />
+    <option name="y" value="23" />
     <option name="width" value="1883" />
     <option name="height" value="1057" />
   </component>
@@ -110,6 +88,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1883" y="23" width="1883" height="1057" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Image Layers" />
       <window_info id="Designer" />

@@ -5,29 +5,18 @@
     <description>A blog about source learning</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 03 Sep 2019 17:02:14 +0800</pubDate>
-    <lastBuildDate>Tue, 03 Sep 2019 17:02:14 +0800</lastBuildDate>
+    <pubDate>Wed, 04 Sep 2019 14:36:53 +0800</pubDate>
+    <lastBuildDate>Wed, 04 Sep 2019 14:36:53 +0800</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
-        <title>Post Dubbo源码入门</title>
-        <description>&lt;h2 id=&quot;dubbo源码入门&quot;&gt;Dubbo源码入门&lt;/h2&gt;
-
-&lt;h4 id=&quot;1简介&quot;&gt;1、简介&lt;/h4&gt;
-
-&lt;p&gt;在熟悉Dubbo源码之前，我们先认识一下java的SPI（Service Provider Interface）机制，这是一种服务发现机制。其本质是将接口实现类的权限定名配置在文件中，并由服务加载器读取配置文件，加载实现类。&lt;/p&gt;
-
-&lt;h4 id=&quot;2spi示例&quot;&gt;2、SPI示例&lt;/h4&gt;
-
-&lt;p&gt;step1&lt;/p&gt;
-
-&lt;p&gt;创建一个maven应用，&lt;/p&gt;
-</description>
-        <pubDate>Tue, 03 Sep 2019 16:50:54 +0800</pubDate>
-        <link>http://localhost:4000/post-dubbo%E6%BA%90%E7%A0%81%E5%85%A5%E9%97%A8/</link>
-        <guid isPermaLink="true">http://localhost:4000/post-dubbo%E6%BA%90%E7%A0%81%E5%85%A5%E9%97%A8/</guid>
+        <title>Spring之ApplicationListener</title>
+        <description>&lt;h3 id=&quot;spring之applicationlistener&quot;&gt;Spring之ApplicationListener&lt;/h3&gt; &lt;h4 id=&quot;背景&quot;&gt;背景&lt;/h4&gt; &lt;p&gt;spring内置的一种观察者模式实现。涉及到的身份有三种：Event、publisher、Listener。当发布者发布一个事件，那么listener会观察到这个事件的发布，并执行自己相应的逻辑。&lt;/p&gt; &lt;p&gt;在实际的业务开发中，是一种非常好的解耦方式，有点消息的味道。比如我们应用中存在一个”新用户注册发放积分“的需求，可以做一个用户注册事件，当新用户注册时，发布一个新用户注册事件，由监听器去做积分发放的逻辑。&lt;/p&gt; &lt;h4 id=&quot;身份源码简介&quot;&gt;身份源码简介&lt;/h4&gt; &lt;p&gt;前面我们有聊到，主要涉及到三种身份，接下来我们分别看看这些身份下都有些什么能力（方法）。&lt;/p&gt; &lt;p&gt;*Publisher&lt;/p&gt; &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ApplicationEventPublisher&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/** * Notify all &amp;lt;strong&amp;gt;matching&amp;lt;/strong&amp;gt; listeners registered with this * application of an application event. Events may be framework events * (such as RequestHandledEvent) or application-specific events. * @param event the event to publish * @see org.springframework.web.context.support.RequestHandledEvent */&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;publishEvent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ApplicationEvent&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/** * Notify all &amp;lt;strong&amp;gt;matching&amp;lt;/strong&amp;gt; listeners registered with this * application of an event. * &amp;lt;p&amp;gt;If the specified {@code event} is not an {@link ApplicationEvent}, * it is wrapped...</description>
+        <pubDate>Wed, 04 Sep 2019 10:25:16 +0800</pubDate>
+        <link>http://localhost:4000/spring%E4%B9%8Bapplicationlistener/</link>
+        <guid isPermaLink="true">http://localhost:4000/spring%E4%B9%8Bapplicationlistener/</guid>
         
-        <category>Dubbo</category>
+        <category>Spring</category>
         
         
       </item>
